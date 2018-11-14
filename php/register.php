@@ -4,7 +4,7 @@
 $mail = filter_input(INPUT_POST,"mail",FILTER_SANITIZE_SPECIAL_CHARS);
 $pseudo = filter_input(INPUT_POST,"pseudo",FILTER_SANITIZE_SPECIAL_CHARS);
 $pw = filter_input(INPUT_POST,"password",FILTER_SANITIZE_SPECIAL_CHARS);
-$pw = crypt($pw, CRYPT_BLOWFISH);
+$pw = hash("sha256",$pw);
 $error = 0;
 
 if(!empty($mail) && !empty($pseudo) && !empty($pw)){
@@ -35,7 +35,7 @@ if(!empty($mail) && !empty($pseudo) && !empty($pw)){
     $error = 1;
 }
 $_SESSION["state"] = "1";
-//redirect();
+redirect();
 
 
 

@@ -14,6 +14,7 @@ session_start();
 
 function redirect(){
     header("Location: ../index.php");
+    exit;
 }
 
 function connectDb(){
@@ -29,10 +30,10 @@ function connectDb(){
 
 function userExistRegister($testedMail){
     $bdd = connectDb();
-    $query = "SELECT * FROM users WHERE mail = :value";
+    $query = "SELECT * FROM users WHERE mail = :mail";
     $statement = $bdd->prepare($query);
     $statement->execute([
-        ":value" => $testedMail,
+        ":mail" => $testedMail,
     ]);
 
     if($statement->rowCount() === 0){
@@ -45,12 +46,11 @@ function userExistRegister($testedMail){
 
 function userExistConnect($testedMail, $testedPassword){
     $bdd = connectDb();
-    $pw = crypt($testedPassword,CRYPT_BLOWFISH);
-    $query = "SELECT * FROM users WHERE mail = :value AND password = :pw";
+    $query = "SELECT * FROM users WHERE mail = :mail AND password = :pw";
     $statement = $bdd->prepare($query);
     $statement->execute([
-        ":value" => $testedMail,
-        ":pw" => $pw
+        ":mail" => $testedMail,
+        ":pw" => $testedPassword
     ]);
 
     if($statement->rowCount() === 1){
@@ -69,10 +69,11 @@ if(isset($_SESSION["mail"], $_SESSION["pw"])){
 
 if(isset($_COOKIE["mail"],$_COOKIE["pw"])){
     if(userExistConnect($_COOKIE["mail"],$_COOKIE["pw"]) === 0){
+        $bdd = connectDb();
         $query = "SELECT * FROM users WHERE mail = :mail";
         $statement = $bdd->prepare($query);
         $statement->execute([
-            ":mail" => $mail
+            ":mail" => $_COOKIE["mail"]
         ]);
         $_SESSION["sessionId"] = $statement->fetchAll()[0][0];
     }
