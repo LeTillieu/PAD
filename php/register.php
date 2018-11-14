@@ -24,7 +24,7 @@ if(!empty($mail) && !empty($pseudo) && !empty($pw)){
             $statement->execute([
                 ":mail" => $mail
             ]);
-            $_SESSION["state"] = $statement->fetchAll()[0][0];
+            $_SESSION["sessionId"] = $statement->fetchAll()[0][0];
         }else{
             $error = 3;
         }
