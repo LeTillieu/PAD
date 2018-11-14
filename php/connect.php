@@ -6,12 +6,17 @@ $pw = filter_input(INPUT_POST,"password",FILTER_SANITIZE_SPECIAL_CHARS);
 
 if(!empty($mail) && !empty($pw)){
     $bdd = connectDb();
-    if(userExist($mail,$pw) === 0){
+    if(userExistConnect($mail,$pw) === 0){
         if(isset($_POST["rememberMe"])){
             $_SESSION["mail"] = $mail;
             $_SESSION["pw"] = crypt($pw,CRYPT_BLOWFISH);
         }
-        $_SESSION["state"] = 1;
+        $query = "SELECT * FROM users WHERE mail = :mail";
+        $statement = $bdd->prepare($query);
+        $statement->execute([
+            ":mail" => $mail
+        ]);
+        $_SESSION["state"] = $statement->fetchAll()[0][0];
     }else{
         $error = 4;
     }

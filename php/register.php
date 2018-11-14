@@ -9,7 +9,7 @@ $error = 0;
 
 if(!empty($mail) && !empty($pseudo) && !empty($pw)){
     if(strpos($mail,"@") >= 0){
-        if(userExist($mail, null) === 0){
+        if(userExistRegister($mail) === 0){
             $bdd = connectDb();
             $query = "INSERT INTO users (mail, pseudo, password) VALUE(:mail, :pseudo, :password)";
             $statement = $bdd->prepare($query);
@@ -18,6 +18,13 @@ if(!empty($mail) && !empty($pseudo) && !empty($pw)){
                 ":pseudo" => $pseudo,
                 ":password" => $pw
             ]);
+
+            $query = "SELECT * FROM users WHERE mail = :mail";
+            $statement = $bdd->prepare($query);
+            $statement->execute([
+                ":mail" => $mail
+            ]);
+            $_SESSION["state"] = $statement->fetchAll()[0][0];
         }else{
             $error = 3;
         }

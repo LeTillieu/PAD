@@ -27,27 +27,37 @@ function connectDb(){
 
 }
 
-function userExist($testedMail, $testedPassword){
+function userExistRegister($testedMail){
     $bdd = connectDb();
     $query = "SELECT * FROM users WHERE mail = :value";
     $statement = $bdd->prepare($query);
     $statement->execute([
         ":value" => $testedMail,
     ]);
-    if ($testedPassword === null) {
-        if($statement->rowCount() === 0){
-            return 0;
-        }
-    }else{
-        if($statement->rowCount() > 0){
-            $result = $statement->fetchAll()[0];
-            $result = $result[3];
-            if(crypt($testedPassword,CRYPT_BLOWFISH) === $result){
-                return 0;
-            }
-        }
-    }
 
+    if($statement->rowCount() === 0){
+        //registration validated
+        return 0;
+    }
+    //registration refused
+    return 1;
+}
+
+function userExistConnect($testedMail, $testedPassword){
+    $bdd = connectDb();
+    $pw = crypt($testedPassword,CRYPT_BLOWFISH);
+    $query = "SELECT * FROM users WHERE mail = :value AND password = :pw";
+    $statement = $bdd->prepare($query);
+    $statement->execute([
+        ":value" => $testedMail,
+        ":pw" => $pw
+    ]);
+
+    if($statement->rowCount() === 1){
+        //connection validated
+        return 0;
+    }
+    //connection refused
     return 1;
 }
 
