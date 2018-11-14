@@ -8,12 +8,10 @@
         <title>Place Aux Débats</title>
     </head>
     <body class="text-center">
-        <?php
-            include 'includes/nav.html';
-        ?>
-        <form class="form-signin" method="POST" action="/php/controller.php">
+        <?php include 'includes/nav.html'; ?>
+        <form class="form-signin" method="POST" action="php/controller.php">
             <h1 class="h2 mb-3 font-weight-normal">S'inscrire</h1>
-            <label for="inputEmail" class="sr-only" >Adresse e-mail</label>
+            <label for="inputEmail" class="sr-only">Adresse e-mail</label>
             <input type="email" id="inputEmail" name="mail" class="form-control mt-4 mb-2" placeholder="Adresse e-mail" required autofocus>
             <label for="inputUsername" class="sr-only">Prénom ou Pseudo</label>
             <input type="text" id="inputUsername" name="pseudo" class="form-control mb-2" placeholder="Prénom ou pseudo" required>
