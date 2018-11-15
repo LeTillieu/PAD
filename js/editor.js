@@ -39,7 +39,7 @@ const editor = init({
         content: 'pell-content-custom-name',
         selected: 'pell-button-selected-custom-name'
     }
-})
+});
 
 // editor.content<HTMLElement>
 // To change the editor's content:

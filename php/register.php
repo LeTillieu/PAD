@@ -1,6 +1,4 @@
 <?php
-
-
 $mail = filter_input(INPUT_POST,"mail",FILTER_SANITIZE_SPECIAL_CHARS);
 $pseudo = filter_input(INPUT_POST,"pseudo",FILTER_SANITIZE_SPECIAL_CHARS);
 $pw = filter_input(INPUT_POST,"password",FILTER_SANITIZE_SPECIAL_CHARS);

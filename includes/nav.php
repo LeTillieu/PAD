@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark text-center">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark text-center">
     <a class="navbar-brand" href="index.php">Place Aux Débats</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,6 +10,9 @@
             <button class="btn btn-outline-success mr-auto ml-auto" type="submit" id="btn-search">Search</button>
         </form>
         <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.php">Accueil</a>
+            </li>
             <?php
             if(!isset($_SESSION["sessionId"])) {
             ?>

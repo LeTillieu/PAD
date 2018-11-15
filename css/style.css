@@ -37,7 +37,7 @@ body {
     padding: 3.5px 12px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .navbar-nav > li > a {
         /* (80px - line-height of 27px) / 2 = 26.5px */
         padding-top: 26.5px;
@@ -46,7 +46,7 @@ body {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 992px) {
     .form-inline .form-control {
         display: block;
         width: 100%;
@@ -62,7 +62,7 @@ body {
     text-align: justify;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .col-9 {
         flex: 0 0 100%;
         max-width: 100%;

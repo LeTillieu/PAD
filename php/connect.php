@@ -1,9 +1,8 @@
 <?php
-
-
 $mailOrPseudo = filter_input(INPUT_POST,"mailOrPseudo",FILTER_SANITIZE_SPECIAL_CHARS);
 $pw = filter_input(INPUT_POST,"password",FILTER_SANITIZE_SPECIAL_CHARS);
 $pw = hash("sha256",$pw);
+
 if(!empty($mailOrPseudo) && !empty($pw)){
     $bdd = connectDb();
     if(userExistConnect($mailOrPseudo,$pw) === 0){

@@ -1,15 +1,4 @@
 <?php
-/**
- *state:
- *  0: unconnected
- *  1: connected
- *error:
- *  0: no error
- *  1: field/s is/are empty
- *  2: mail is not good
- *  3: account already exist with this mail
- **/
-
 session_start();
 
 function redirect(){
