@@ -5,6 +5,19 @@
 
 <body class="text-center">
 <?php include 'includes/nav.php'; ?>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <title>Place Aux Débats</title>
+    </head>
+    <body>
+        <?php
+            include 'includes/nav.php';
+        ?>
         <div class="container mt-3">
             <div class="row">
                 <div class="col-9 pt-2 mt-3">

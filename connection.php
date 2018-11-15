@@ -5,7 +5,7 @@ include "includes/head.php";
 
 <body class="text-center">
 <?php include 'includes/nav.php'; ?>
-        <form class="form-signin" method="POST" action="php/controller.php">
+        <form class="form-signin" method="POST" action="/php/controller.php">
             <h1 class="h2 mb-3 font-weight-normal">Se connecter</h1>
             <label for="inputEmail" class="sr-only">Adresse e-mail</label>
             <input type="email" id="inputEmail" name="mail" class="form-control mt-4 mb-2" placeholder="Adresse e-mail" required autofocus>

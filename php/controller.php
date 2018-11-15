@@ -20,7 +20,7 @@ function redirect(){
 function connectDb(){
     try {
         $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "isencir", $opts);
+        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "", $opts);
         return $bdd;
     } catch (Exception $e) {
         exit('Impossible to connect to database.');

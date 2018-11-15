@@ -14,10 +14,10 @@
             if(!isset($_SESSION["sessionId"])) {
             ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="registration.php">S'inscrire</a>
+                    <a class="nav-link" href="/registration.php">S'inscrire</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="connection.php">Se connecter</a>
+                    <a class="nav-link" href="/connection.php">Se connecter</a>
                 </li>
             <?php
             }else {

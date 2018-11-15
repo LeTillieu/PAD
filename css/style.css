@@ -88,7 +88,7 @@ body {
     box-sizing: border-box;
     height: auto;
     padding: 10px;
-    font-size: 16px;
+    font-size: 12px;
 }
 .form-signin .form-control:focus {
     z-index: 2;
@@ -102,4 +102,13 @@ body {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+#editor{
+    background-color: white;
+    height: 200px;
+    width: 500px;
+}
+.pell-actionbar{
+    background-color: red;
 }
