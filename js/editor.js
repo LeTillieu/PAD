@@ -1,4 +1,4 @@
-import { exec, init } from 'pell-master/src/pell.js';
+import { exec, init } from '../pell-master/src/pell.js';
 
 const editor = init({
     element: document.getElementById('editor'),
@@ -43,4 +43,4 @@ const editor = init({
 
 // editor.content<HTMLElement>
 // To change the editor's content:
-editor.content.innerHTML = '<b><u><i>Initial content!</i></u></b>'
+editor.content.innerHTML = 'your message'
