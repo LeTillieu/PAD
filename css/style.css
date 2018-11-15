@@ -106,7 +106,6 @@ body {
 
 #editor{
     background-color: white;
-    height: 200px;
-    width: 500px;
+    height: 400px;
+    width: 100%;
 }
-
