@@ -124,7 +124,6 @@ export const init = settings => {
   content.oninput = ({ target: { firstChild } }) => {
     if (firstChild && firstChild.nodeType === 3) exec(formatBlock, `<${defaultParagraphSeparator}>`)
     else if (content.innerHTML === '<br>') content.innerHTML = ''
-    settings.onChange(content.innerHTML)
   }
   content.onkeydown = event => {
     if (event.key === 'Tab') {
