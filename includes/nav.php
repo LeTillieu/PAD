@@ -43,6 +43,9 @@ if(!isset($_SESSION["sessionId"])) {
             </form>
             <ul class="navbar-nav">
                 <li class="nav-item">
+                    <a class="nav-link" href="../administration.php">Administration</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#.php">Profile</a>
                 </li>
                 <li class="nav-item">

@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/style.css">
-        <title>Place Aux Débats</title>
-    </head>
-    <body class="text-center">
-        <?php
-        include "php/controller.php";
-        include 'includes/nav.php';
-        ?>
+<?php
+include "php/controller.php";
+include "includes/head.php";
+?>
+
+<body class="text-center">
+<?php include 'includes/nav.php'; ?>
         <form class="form-signin" method="POST" action="php/controller.php">
             <h1 class="h2 mb-3 font-weight-normal">Se connecter</h1>
             <label for="inputEmail" class="sr-only">Adresse e-mail</label>

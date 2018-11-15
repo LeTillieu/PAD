@@ -62,8 +62,6 @@ function userExistConnect($testedMail, $testedPassword){
 }
 
 
-
-
 if(isset($_COOKIE["mail"],$_COOKIE["pw"])){
     if(userExistConnect($_COOKIE["mail"],$_COOKIE["pw"]) === 0){
         $bdd = connectDb();

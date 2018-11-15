@@ -10,8 +10,8 @@ if(!empty($mail) && !empty($pw)){
         if(isset($_POST["rememberMe"])){
             $_SESSION["mail"] = $mail;
             $_SESSION["pw"] = $pw;
-            setcookie("mail",$_SESSION["mail"],time()+365*24*3600,null,null,false,true);
-            setcookie("pw",$_SESSION["pw"],time()+365*24*3600,null,null,false,true);
+            setcookie("mail",$_SESSION["mail"],time()+365*24*3600,"/",null,false,true);
+            setcookie("pw",$_SESSION["pw"],time()+365*24*3600,"/",null,false,true);
 
         }
         $query = "SELECT * FROM users WHERE mail = :mail";
