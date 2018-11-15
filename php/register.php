@@ -9,7 +9,7 @@ $error = 0;
 
 if(!empty($mail) && !empty($pseudo) && !empty($pw)){
     if(strpos($mail,"@") >= 0){
-        if(userExistRegister($mail) === 0){
+        if(userExistRegister($mail, $pseudo) === 0){
             $bdd = connectDb();
             $query = "INSERT INTO users (mail, pseudo, password) VALUE(:mail, :pseudo, :password)";
             $statement = $bdd->prepare($query);

@@ -28,12 +28,13 @@ function connectDb(){
 
 }
 
-function userExistRegister($testedMail){
+function userExistRegister($testedMail, $testedPseudo){
     $bdd = connectDb();
-    $query = "SELECT * FROM users WHERE mail = :mail";
+    $query = "SELECT * FROM users WHERE mail = :mail OR pseudo = :pseudo";
     $statement = $bdd->prepare($query);
     $statement->execute([
         ":mail" => $testedMail,
+        ":pseudo" => $testedPseudo
     ]);
 
     if($statement->rowCount() === 0){
@@ -44,12 +45,12 @@ function userExistRegister($testedMail){
     return 1;
 }
 
-function userExistConnect($testedMail, $testedPassword){
+function userExistConnect($testedMailOrPseudo, $testedPassword){
     $bdd = connectDb();
-    $query = "SELECT * FROM users WHERE mail = :mail AND password = :pw";
+    $query = "SELECT * FROM users WHERE (mail = :mailOrPseudo OR pseudo = :mailOrPseudo) AND password = :pw";
     $statement = $bdd->prepare($query);
     $statement->execute([
-        ":mail" => $testedMail,
+        ":mailOrPseudo" => $testedMailOrPseudo,
         ":pw" => $testedPassword
     ]);
 
@@ -62,13 +63,13 @@ function userExistConnect($testedMail, $testedPassword){
 }
 
 
-if(isset($_COOKIE["mail"],$_COOKIE["pw"])){
-    if(userExistConnect($_COOKIE["mail"],$_COOKIE["pw"]) === 0){
+if(isset($_COOKIE["mailOrPseudo"],$_COOKIE["pw"])){
+    if(userExistConnect($_COOKIE["mailOrPseudo"],$_COOKIE["pw"]) === 0){
         $bdd = connectDb();
-        $query = "SELECT * FROM users WHERE mail = :mail";
+        $query = "SELECT * FROM users WHERE mail = :mailOrPseudo OR pseudo = :mailOrPseudo";
         $statement = $bdd->prepare($query);
         $statement->execute([
-            ":mail" => $_COOKIE["mail"]
+            ":mailOrPseudo" => $_COOKIE["mailOrPseudo"]
         ]);
         $_SESSION["sessionId"] = $statement->fetchAll()[0][0];
     }

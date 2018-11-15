@@ -3,9 +3,9 @@ include "php/controller.php";
 include "includes/head.php";
 ?>
 
-<body class="text-center">
-<?php include 'includes/nav.php'; ?>
-        <form class="form-signin" method="POST" action="/php/controller.php">
+    <body class="text-center">
+        <?php include 'includes/nav.php'; ?>
+        <form class="form-signin" method="POST" action="php/controller.php">
             <h1 class="h2 mb-3 font-weight-normal">S'inscrire</h1>
             <label for="inputEmail" class="sr-only">Adresse e-mail</label>
             <input type="email" id="inputEmail" name="mail" class="form-control mt-4 mb-2" placeholder="Adresse e-mail" required autofocus>
@@ -17,7 +17,7 @@ include "includes/head.php";
             <p class="mt-4 mb-3 text-muted">&copy; FiftyTwo Company - 2018</p>
         </form>
 
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

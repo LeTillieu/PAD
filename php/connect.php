@@ -1,23 +1,23 @@
 <?php
 
 
-$mail = filter_input(INPUT_POST,"mail",FILTER_SANITIZE_SPECIAL_CHARS);
+$mailOrPseudo = filter_input(INPUT_POST,"mailOrPseudo",FILTER_SANITIZE_SPECIAL_CHARS);
 $pw = filter_input(INPUT_POST,"password",FILTER_SANITIZE_SPECIAL_CHARS);
 $pw = hash("sha256",$pw);
-if(!empty($mail) && !empty($pw)){
+if(!empty($mailOrPseudo) && !empty($pw)){
     $bdd = connectDb();
-    if(userExistConnect($mail,$pw) === 0){
+    if(userExistConnect($mailOrPseudo,$pw) === 0){
         if(isset($_POST["rememberMe"])){
-            $_SESSION["mail"] = $mail;
+            $_SESSION["mailOrPseudo"] = $mailOrPseudo;
             $_SESSION["pw"] = $pw;
-            setcookie("mail",$_SESSION["mail"],time()+365*24*3600,"/",null,false,true);
+            setcookie("mailOrPseudo",$_SESSION["mailOrPseudo"],time()+365*24*3600,"/",null,false,true);
             setcookie("pw",$_SESSION["pw"],time()+365*24*3600,"/",null,false,true);
 
         }
-        $query = "SELECT * FROM users WHERE mail = :mail";
+        $query = "SELECT * FROM users WHERE mail = :mailOrPseudo OR pseudo = :mailOrPseudo";
         $statement = $bdd->prepare($query);
         $statement->execute([
-            ":mail" => $mail
+            ":mailOrPseudo" => $mailOrPseudo
         ]);
 
         $_SESSION["sessionId"] = $statement->fetchAll()[0][0];
@@ -25,7 +25,6 @@ if(!empty($mail) && !empty($pw)){
         $error = 4;
     }
 }else{
-    $_SESSION["state"] = 0;
     $error = 1;
 }
 
