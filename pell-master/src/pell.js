@@ -33,15 +33,15 @@ const defaultActions = {
     state: () => queryCommandState('strikeThrough'),
     result: () => exec('strikeThrough')
   },
-    heading1: {
-    icon: '<b>H<sub>1</sub></b>',
-    title: 'Heading 1',
-    result: () => exec(formatBlock, '<h1>')
-  },
     heading2: {
     icon: '<b>H<sub>2</sub></b>',
     title: 'Heading 2',
     result: () => exec(formatBlock, '<h2>')
+  },
+    heading3: {
+    icon: '<b>H<sub>3</sub></b>',
+    title: 'Heading 3',
+    result: () => exec(formatBlock, '<h3>')
   },
     paragraph: {
         icon: '&#182;',
@@ -115,7 +115,6 @@ export const init = settings => {
 
   const actionbar = createElement('div')
   actionbar.className = classes.actionbar
-  actionbar.style.backgroundColor = "grey"
   appendChild(settings.element, actionbar)
 
   const content = settings.element.content = createElement('div')

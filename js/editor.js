@@ -9,8 +9,8 @@ const editor = init({
         'underline',
         'italic',
         'paragraph',
-        'heading1',
         'heading2',
+        'heading3',
         'olist',
         'ulist',
         {
