@@ -34,10 +34,10 @@ const editor = init({
         }
     ],
     classes: {
-        actionbar: 'pell-actionbar-custom-name',
-        button: 'pell-button-custom-name',
-        content: 'pell-content-custom-name',
-        selected: 'pell-button-selected-custom-name'
+        actionbar: 'pell-actionbar',
+        button: 'pell-button',
+        content: 'pell-content',
+        selected: 'pell-button-selected'
     }
 });
 
