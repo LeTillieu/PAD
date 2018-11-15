@@ -6,7 +6,7 @@ include "includes/head.php";
     <body class="text-center">
         <?php include 'includes/nav.php'; ?>
         <form action="">
-            <h1 class="h2 mb-3 font-weight-normal">Ajouter un article</h1>
+            <h1 class="h2 mt-3 mb-3 font-weight-normal">Ajouter un article</h1>
             <label for="inputTitle" class="sr-only">Titre</label>
             <input type="text" id="inputTitle" name="articleTitle" class="form-control mt-4 mb-2" placeholder="Titre" required autofocus>
             <div id="editor" class="pell mt-3"></div>

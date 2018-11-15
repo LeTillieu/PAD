@@ -115,7 +115,6 @@ export const init = settings => {
 
   const actionbar = createElement('div')
   actionbar.className = classes.actionbar
-  actionbar.style.backgroundColor = "grey"
   appendChild(settings.element, actionbar)
 
   const content = settings.element.content = createElement('div')
