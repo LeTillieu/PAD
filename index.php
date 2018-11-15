@@ -8,7 +8,10 @@
         <title>Place Aux Débats</title>
     </head>
     <body>
-        <?php include 'includes/nav.html'; ?>
+        <?php
+        session_start();
+        include 'includes/nav.php';
+        ?>
         <div class="container mt-3">
             <div class="row">
                 <div class="col-9 pt-2 mt-3">

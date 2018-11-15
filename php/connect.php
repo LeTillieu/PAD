@@ -10,6 +10,8 @@ if(!empty($mail) && !empty($pw)){
         if(isset($_POST["rememberMe"])){
             $_SESSION["mail"] = $mail;
             $_SESSION["pw"] = $pw;
+            setcookie("mail",$_SESSION["mail"],time()+365*24*3600,null,null,false,true);
+            setcookie("pw",$_SESSION["pw"],time()+365*24*3600,null,null,false,true);
 
         }
         $query = "SELECT * FROM users WHERE mail = :mail";
@@ -17,6 +19,7 @@ if(!empty($mail) && !empty($pw)){
         $statement->execute([
             ":mail" => $mail
         ]);
+
         $_SESSION["sessionId"] = $statement->fetchAll()[0][0];
     }else{
         $error = 4;

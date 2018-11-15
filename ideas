@@ -1,5 +1,9 @@
 -"controller.php" dans fichiers principaux
+
 -verifier etat connexion
     -changer nav bar si connecté
+
 -ajouter balises erreurs
     rediriger erreur
+
+-mettre les href dans navConnected.html

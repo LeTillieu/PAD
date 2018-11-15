@@ -20,7 +20,7 @@ function redirect(){
 function connectDb(){
     try {
         $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "", $opts);
+        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "isencir", $opts);
         return $bdd;
     } catch (Exception $e) {
         exit('Impossible to connect to database.');
@@ -62,10 +62,7 @@ function userExistConnect($testedMail, $testedPassword){
 }
 
 
-if(isset($_SESSION["mail"], $_SESSION["pw"])){
-    setcookie("mail",$_SESSION["mail"],time()+365*24*3600,null,null,false,true);
-    setcookie("pw",$_SESSION["pw"],time()+365*24*3600,null,null,false,true);
-}
+
 
 if(isset($_COOKIE["mail"],$_COOKIE["pw"])){
     if(userExistConnect($_COOKIE["mail"],$_COOKIE["pw"]) === 0){
