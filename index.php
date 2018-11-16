@@ -13,6 +13,8 @@
                 </div>
                 <div class="col-3"></div>
 
+                <hr>
+
                 <div class="col-3"></div>
                 <div class="col-9 pt-2 mt-3">
                     <h2 class="text-center">Hello</h2>

@@ -11,28 +11,28 @@
         </form>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="index.php">Accueil</a>
+                <a class="nav-link text-white" href="index.php">Accueil</a>
             </li>
             <?php
             if(!isset($_SESSION["sessionId"])) {
             ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="registration.php">S'inscrire</a>
+                    <a class="nav-link text-white" href="registration.php">S'inscrire</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="connection.php">Se connecter</a>
+                    <a class="nav-link text-white" href="connection.php">Se connecter</a>
                 </li>
             <?php
             }else {
             ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="administration.php">Administration</a>
+                    <a class="nav-link text-white" href="administration.php">Administration</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Profile</a>
+                    <a class="nav-link text-white" href="profile.php">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="php/disconnect.php">Se déconnecter</a>
+                    <a class="nav-link text-white" href="php/disconnect.php">Se déconnecter</a>
                 </li>
             <?php
             }

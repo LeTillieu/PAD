@@ -62,9 +62,18 @@ body {
     }
 }
 
+.text-white:hover {
+    text-decoration: underline;
+}
+
 /* Index */
 .row {
     text-align: justify;
+}
+
+hr {
+    width: 76%;
+    border-top: black 1px solid;
 }
 
 @media (max-width: 992px) {
