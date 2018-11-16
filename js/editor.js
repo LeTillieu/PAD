@@ -15,20 +15,20 @@ const editor = init({
         'ulist',
         {
             name: "justifyLeft",
-            icon: '<',
+            icon: '<img src="img/left.svg"/>',
             title: 'left',
             result: () => exec("justifyLeft")
         },
         {
             name: "justifyCenter",
-            icon: '-',
+            icon: '<img src="img/center.svg"/>',
             title: 'center',
             result: () => exec("justifyCenter")
         }
         ,
         {
             name: "justifyRight",
-            icon: '>',
+            icon: '<img src="img/right.svg"/>',
             title: 'right',
             result: () => exec("justifyRight")
         }
