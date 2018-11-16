@@ -65,9 +65,9 @@ bouton.addEventListener("click",function (event) {
     event.preventDefault();
     var texte = content.innerHTML;
     $.ajax({
-        type: "post",
-        data: "title="+$("#inputTitle").val()+"&content="+texte,
+        type: "POST",
         url: "php/controller.php",
+        data: {title: $("#inputTitle").val(), content: texte},
         success: function () {
             console.log("wesh ca marche");
         },
@@ -77,4 +77,16 @@ bouton.addEventListener("click",function (event) {
         dataType: "html"
     });
 });
+
+
+var nav = $(".adminNav");
+
+for(var i = 0; i < nav.length; i++){
+    nav[i].onclick = function () {
+        var id = $(this).attr("id");
+        $(".allMenus").addClass("unselectedAdminMenu");
+        $("."+id).removeClass("unselectedAdminMenu");
+    }
+}
+
 

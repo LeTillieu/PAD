@@ -9,7 +9,7 @@ function redirect(){
 function connectDb(){
     try {
         $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "", $opts);
+        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "isencir", $opts);
         return $bdd;
     } catch (Exception $e) {
         exit('Impossible to connect to database.');
@@ -70,8 +70,26 @@ if(isset($_POST["submitRegister"])){
 if(isset($_POST["submitConnect"])){
     include("connect.php");
 }
-if(isset($_POST["articleForm"])){
-    echo "test";
+if(isset($_POST["title"], $_POST["content"])){
+    $forbidden = ["<p>Votre texte ici...</p>",""]; //add ban words
+    $title = filter_input(INPUT_POST,"title",FILTER_SANITIZE_SPECIAL_CHARS);
+    $content = $_POST["content"];
+    $date  = new DateTime();
+
+    if(!in_array($content, $forbidden) && !in_array($title, $forbidden)){
+        error_log("ca passe",4);
+        $bdd = connectDb();
+        $query = "INSERT INTO articles (title, content, publishedDate, authorId) VALUES(:title, :content, :ts, :id)";
+        $statement = $bdd->prepare($query);
+        $statement->execute([
+            ":title" => $title,
+            ":content" => $content,
+            ":ts" => $date->getTimestamp(),
+            ":id" => $_SESSION["sessionId"]
+        ]);
+    }
+
+
 }
 
 
