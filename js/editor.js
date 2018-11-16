@@ -43,4 +43,4 @@ const editor = init({
 
 // editor.content<HTMLElement>
 // To change the editor's content:
-editor.content.innerHTML = 'your message'
+editor.content.innerHTML = '<p style="text-align: left;">Ecrivez ici</p>'

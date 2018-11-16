@@ -6,6 +6,11 @@ include "includes/head.php";
     <body class="text-center">
         <?php include 'includes/nav.php'; ?>
         <div class="container">
+            <nav class="nav navbar-dark bg-dark d-flex justify-content-around mt-4">
+                <a class="p-2 text-white" href="#">Ajouter un article</a>
+                <a class="p-2 text-white" href="#">Liste des articles</a>
+                <a class="p-2 text-white" href="#">Liste des articles report</a>
+            </nav>
             <form action="">
                 <h1 class="h2 mt-3 mb-3 font-weight-normal">Ajouter un article</h1>
                 <label for="inputTitle" class="sr-only">Titre</label>
