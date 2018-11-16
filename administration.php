@@ -11,7 +11,7 @@ include "includes/head.php";
                 <a class="p-2 text-white" href="#">Liste des articles</a>
                 <a class="p-2 text-white" href="#">Liste des articles report</a>
             </nav>
-            <form action="">
+            <form name="articleForm" action="php/controller.php" method="POST">
                 <h1 class="h2 mt-3 mb-3 font-weight-normal">Ajouter un article</h1>
                 <label for="inputTitle" class="sr-only">Titre</label>
                 <input type="text" id="inputTitle" name="articleTitle" class="form-control mt-4 mb-2" placeholder="Titre" required autofocus>

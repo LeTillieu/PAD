@@ -64,15 +64,15 @@ if(isset($_COOKIE["mailOrPseudo"],$_COOKIE["pw"])){
     }
 }
 
-
-
 if(isset($_POST["submitRegister"])){
     include("register.php");
 }
 if(isset($_POST["submitConnect"])){
     include("connect.php");
 }
-
+if(isset($_POST["submitArticle"])){
+    echo "test";
+}
 
 
 

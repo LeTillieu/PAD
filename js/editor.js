@@ -66,5 +66,6 @@ bouton.addEventListener("click",function (event) {
     var texte = content.innerHTML;
     var inputText = document.getElementsByClassName("contentText")[0];
     inputText.setAttribute("value", texte);
+    document.getElementsByName("articleForm")[0].submit();
 });
 
