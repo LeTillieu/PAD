@@ -70,7 +70,7 @@ if(isset($_POST["submitRegister"])){
 if(isset($_POST["submitConnect"])){
     include("connect.php");
 }
-if(isset($_POST["submitArticle"])){
+if(isset($_POST["articleForm"])){
     echo "test";
 }
 

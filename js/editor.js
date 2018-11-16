@@ -64,8 +64,17 @@ content.addEventListener("focus",function () {
 bouton.addEventListener("click",function (event) {
     event.preventDefault();
     var texte = content.innerHTML;
-    var inputText = document.getElementsByClassName("contentText")[0];
-    inputText.setAttribute("value", texte);
-    document.getElementsByName("articleForm")[0].submit();
+    $.ajax({
+        type: "post",
+        data: "title="+$("#inputTitle").val()+"&content="+texte,
+        url: "php/controller.php",
+        success: function () {
+            console.log("wesh ca marche");
+        },
+        error: function(e){
+            console.log(e);
+        },
+        dataType: "html"
+    });
 });
 
