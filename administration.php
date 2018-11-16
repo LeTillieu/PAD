@@ -22,7 +22,7 @@ include "includes/head.php";
                 </form>
             </div>
             <div class="allArticles allMenus unselectedAdminMenu">
-                all articles
+                <?php include("php/allArticles.php"); ?>
             </div>
             <div class="allReported allMenus unselectedAdminMenu">
                 reported
