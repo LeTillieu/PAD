@@ -41,6 +41,30 @@ const editor = init({
     }
 });
 
+
+editor.content.innerHTML ="<p>Votre texte ici...</p>";
+
 // editor.content<HTMLElement>
 // To change the editor's content:
-editor.content.innerHTML = '<p style="text-align: left;">Ecrivez ici</p>'
+console.clear();
+
+
+var bouton = document.getElementsByName("submitArticle")[0];
+var content = document.getElementsByClassName("pell-content")[0];
+
+
+//Placeholder fait maison
+content.addEventListener("focus",function () {
+    if(content.textContent === "Votre texte ici..."){
+        content.textContent = "";
+    }
+});
+
+
+bouton.addEventListener("click",function (event) {
+    event.preventDefault();
+    var texte = content.innerHTML;
+    var inputText = document.getElementsByClassName("contentText")[0];
+    inputText.setAttribute("value", texte);
+});
+

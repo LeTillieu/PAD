@@ -156,5 +156,4 @@ export const init = settings => {
 
   return settings.element
 }
-
 export default { exec, init }
