@@ -10,10 +10,8 @@
         <div class="row">
 
             <?php
-
             $res = getArticles(5);
             $nbElement = count($res)-1;
-            error_log($nbElement,4);
             $i = 0;
 
             foreach ($res as $cur){
@@ -26,7 +24,7 @@
                     ?>
                     <div class="col-9 pt-2 mt-3">
                         <h2 class="text-center"><?php echo $cur[1];?></h2>
-                        <p>'<?php echo $cur[2];?></p>
+                        <p><?php echo $cur[2];?></p>
                     </div>
                     <div class="col-3"></div>
 
