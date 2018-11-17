@@ -123,3 +123,7 @@ hr {
     height: 400px;
     width: 100%;
 }
+
+.unselectedAdminMenu{
+    display: none;
+}

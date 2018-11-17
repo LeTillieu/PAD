@@ -1,5 +1,6 @@
 import { exec, init } from '../pell-master/src/pell.js';
 
+//'tool' bar
 const editor = init({
     element: document.getElementById('editor'),
     defaultParagraphSeparator: 'p',
@@ -44,12 +45,12 @@ const editor = init({
 
 editor.content.innerHTML ="<p>Votre texte ici...</p>";
 
-// editor.content<HTMLElement>
-// To change the editor's content:
+
 console.clear();
 
-
+//initialization of variables
 var bouton = document.getElementsByName("submitArticle")[0];
+var nav = $(".adminNav");
 var content = document.getElementsByClassName("pell-content")[0];
 
 
@@ -61,20 +62,37 @@ content.addEventListener("focus",function () {
 });
 
 
+//add article to db
 bouton.addEventListener("click",function (event) {
     event.preventDefault();
     var texte = content.innerHTML;
+
+
     $.ajax({
-        type: "post",
-        data: "title="+$("#inputTitle").val()+"&content="+texte,
+        type: "POST",
         url: "php/controller.php",
+        data: {title: $("#inputTitle").val(), content: texte},
         success: function () {
-            console.log("wesh ca marche");
+            //redirection
+            window.location.replace("../index.php");
+
         },
         error: function(e){
+            console.log("Impossible d'ajouter cet article");
             console.log(e);
         },
         dataType: "html"
     });
+
 });
+
+//show appropriated part of page
+for(var i = 0; i < nav.length; i++){
+    nav[i].onclick = function () {
+        var id = $(this).attr("id");
+        $(".allMenus").addClass("unselectedAdminMenu");
+        $("."+id).removeClass("unselectedAdminMenu");
+    }
+}
+
 

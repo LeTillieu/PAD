@@ -5,23 +5,58 @@
 
     <body class="text-center">
     <?php include 'includes/nav.php'; ?>
-        <div class="container mt-3">
-            <div class="row">
-                <div class="col-9 pt-2 mt-3">
-                    <h2 class="text-center">Hello</h2>
-                    <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
-                </div>
-                <div class="col-3"></div>
 
-                <hr>
+    <div class="container mt-3">
+        <div class="row">
 
-                <div class="col-3"></div>
-                <div class="col-9 pt-2 mt-3">
-                    <h2 class="text-center">Hello</h2>
-                    <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
-                </div>
-            </div>
+            <?php
+
+            $res = getArticles(5);
+            $nbElement = count($res)-1;
+            error_log($nbElement,4);
+            $i = 0;
+
+            foreach ($res as $cur){
+                $authorQuery = "SELECT * FROM users INNER JOIN articles ON users.id = articles.authorId";
+                $authorStatement = $bdd->prepare($authorQuery);
+                $authorStatement->execute();
+                $authorRes = $authorStatement->fetchAll();
+
+                if($i % 2 === 0){
+                    ?>
+                    <div class="col-9 pt-2 mt-3">
+                        <h2 class="text-center"><?php echo $cur[1];?></h2>
+                        <p>'<?php echo $cur[2];?></p>
+                    </div>
+                    <div class="col-3"></div>
+
+                    <?php
+                    if($i !== $nbElement){
+                        echo "<hr>";
+                    }
+                }else{
+
+                    ?>
+                    <div class="col-3"></div>
+                    <div class="col-9 pt-2 mt-3">
+                        <h2 class="text-center"><?php echo $cur[1];?></h2>
+                        <p><?php echo $cur[2];?></p>
+                    </div>
+
+
+                    <?php
+                    if($i !== $nbElement){
+                        echo "<hr>";
+                    }
+                }
+                $i++;
+
+            }
+            ?>
         </div>
+    </div>
+    </div>
+    </div>
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
     </body>

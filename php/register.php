@@ -1,10 +1,12 @@
 <?php
+//validation and initialization  of variables
 $mail = filter_input(INPUT_POST,"mail",FILTER_SANITIZE_SPECIAL_CHARS);
 $pseudo = filter_input(INPUT_POST,"pseudo",FILTER_SANITIZE_SPECIAL_CHARS);
 $pw = filter_input(INPUT_POST,"password",FILTER_SANITIZE_SPECIAL_CHARS);
 $pw = hash("sha256",$pw);
 $error = 0;
 
+//registration
 if(!empty($mail) && !empty($pseudo) && !empty($pw)){
     if(strpos($mail,"@") >= 0){
         if(userExistRegister($mail, $pseudo) === 0){
@@ -32,10 +34,6 @@ if(!empty($mail) && !empty($pseudo) && !empty($pw)){
 }else{
     $error = 1;
 }
-$_SESSION["state"] = "1";
+$_SESSION["sessionId"] = NULL;
 redirect();
-
-
-
-
 
