@@ -1,4 +1,9 @@
+<div class="container mt-3">
+    <div class="row">
+
 <?php
+
+
 
 function getCreationDate($ts){
     return date("d M Y", $ts);
@@ -11,6 +16,7 @@ $statement->execute();
 
 $res = $statement->fetchAll();
 
+$i = 0;
 
 foreach ($res as $cur){
     $authorQuery = "SELECT * FROM users INNER JOIN articles ON users.id = articles.authorId";
@@ -18,15 +24,29 @@ foreach ($res as $cur){
     $authorStatement->execute();
     $authorRes = $authorStatement->fetchAll();
 
-    echo "titre: ".$cur[1];
-    echo "<br/>";
-    echo "<br/>";
-    echo "contenu: ".$cur[2];
-    echo "créé le: ".getCreationDate($cur[3]);
-    echo " par: ". $authorRes[0][1];
-    echo "<br/>";
-    echo "<br/>";
-    echo "<br/>";
-    echo "<br/>";
-    echo "<br/>";
+    if($i % 2 === 0){
+         ?>
+            <div class="col-9 pt-2 mt-3">
+                <h2 class="text-center">'<?php echo $cur[1];?>'</h2>
+                <p>'.<?php echo $cur[2];?>.'</p>
+            </div>
+            <div class="col-3"></div>
+        
+        <?php;
+    }else{
+
+        ?>
+            <div class="col-3"></div>
+            <div class="col-9 pt-2 mt-3">
+                <h2 class="text-center">'<?php echo $cur[1];?>'</h2>
+                <p>'.<?php echo $cur[2];?>.'</p>
+            </div>
+        
+        <?php
+    }
+    echo "<hr>";
+    $i++;
 }
+?>
+    </div>
+</div>

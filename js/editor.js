@@ -44,12 +44,12 @@ const editor = init({
 
 editor.content.innerHTML ="<p>Votre texte ici...</p>";
 
-// editor.content<HTMLElement>
-// To change the editor's content:
+
 console.clear();
 
 
 var bouton = document.getElementsByName("submitArticle")[0];
+var nav = $(".adminNav");
 var content = document.getElementsByClassName("pell-content")[0];
 
 
@@ -64,22 +64,25 @@ content.addEventListener("focus",function () {
 bouton.addEventListener("click",function (event) {
     event.preventDefault();
     var texte = content.innerHTML;
+
+
     $.ajax({
         type: "POST",
         url: "php/controller.php",
         data: {title: $("#inputTitle").val(), content: texte},
         success: function () {
-            console.log("wesh ca marche");
+            $(".addArticle").addClass("unselectedAdminMenu");
+            $("#inputTitle").val("");
+            $(".pell-content").text("");
+            $(".allArticles").removeClass("unselectedAdminMenu");
         },
         error: function(e){
             console.log(e);
         },
         dataType: "html"
     });
+
 });
-
-
-var nav = $(".adminNav");
 
 for(var i = 0; i < nav.length; i++){
     nav[i].onclick = function () {

@@ -77,7 +77,6 @@ if(isset($_POST["title"], $_POST["content"])){
     $date  = new DateTime();
 
     if(!in_array($content, $forbidden) && !in_array($title, $forbidden)){
-        error_log("ca passe",4);
         $bdd = connectDb();
         $query = "INSERT INTO articles (title, content, publishedDate, authorId) VALUES(:title, :content, :ts, :id)";
         $statement = $bdd->prepare($query);
