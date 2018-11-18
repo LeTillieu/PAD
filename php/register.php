@@ -25,6 +25,14 @@ if(!empty($mail) && !empty($pseudo) && !empty($pw)){
                 ":mail" => $mail
             ]);
             $_SESSION["sessionId"] = $statement->fetchAll()[0][0];
+            if(is_uploaded_file($_FILES["picture"]['tmp_name'])){
+                if($_FILES['picture']['type'] == 'image/jpg' || $_FILES['picture']['type'] == 'image/jpeg' || $_FILES['picture']['type'] == 'image/png'){
+                    $type = explode('/', $_FILES['picture']['type']);
+                    $lienImage = 'profilePicture/'.$_SESSION["sessionId"].'.'.$type[1];
+                    move_uploaded_file($_FILES['picture']['tmp_name'], $lienImage);
+                }
+            }
+
         }else{
             $error = 3;
         }

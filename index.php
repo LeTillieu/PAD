@@ -14,18 +14,17 @@
             $res = getArticles(5);
             $nbElement = count($res)-1;
             $i = 0;
-
             foreach ($res as $cur){
                 $authorQuery = "SELECT * FROM users INNER JOIN articles ON users.id = articles.authorId";
                 $authorStatement = $bdd->prepare($authorQuery);
                 $authorStatement->execute();
-                $authorRes = $authorStatement->fetchAll();
-
+                $authorRes = $authorStatement->fetchAll()[0];
                 if($i % 2 === 0){
                     ?>
                     <div class="col-9 pt-2 mt-3">
                         <h2 class="text-center"><?php echo $cur[1];?></h2>
                         <p><?php echo $cur[2];?></p>
+                        <div><?php echo $authorRes[1]." - ".getCreationDate($cur[3]);?></div>
                     </div>
                     <div class="col-3"></div>
 
@@ -40,6 +39,7 @@
                     <div class="col-9 pt-2 mt-3">
                         <h2 class="text-center"><?php echo $cur[1];?></h2>
                         <p><?php echo $cur[2];?></p>
+                        <div><?php echo $authorRes[1]." - ".getCreationDate($cur[3]);?></div>
                     </div>
 
 
