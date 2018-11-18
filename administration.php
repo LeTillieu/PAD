@@ -4,7 +4,11 @@ include "includes/head.php";
 ?>
 
     <body class="text-center">
-        <?php include 'includes/nav.php'; ?>
+        <?php include 'includes/nav.php';
+        if(!isset($_SESSION['sessionId'])){
+            redirect();
+        }
+        ?>
         <div class="container">
             <nav class="nav navbar-dark bg-dark d-flex justify-content-around mt-4">
                 <a id="addArticle" class="p-2 text-white adminNav" href="#">Ajouter un article</a>
@@ -12,13 +16,13 @@ include "includes/head.php";
                 <a id="allReported" class="p-2 text-white adminNav" href="#">Liste des articles report</a>
             </nav>
             <div class="addArticle allMenus">
-                <form action="php/controller.php" method="POST">
+                <form action="administration.php" method="POST">
                     <h1 class="h2 mt-3 mb-3 font-weight-normal">Ajouter un article</h1>
                     <label for="inputTitle" class="sr-only">Titre</label>
                     <input type="text" id="inputTitle" name="articleTitle" class="form-control mt-4 mb-2" placeholder="Titre" required autofocus>
                     <div id="editor" class="text-left pell mt-3"></div>
                     <input type="hidden" class="contentText" name="contentTexte">
-                    <button class="btn btn-lg btn-primary btn-block mt-4" type="submit" name="submitArticle">Ajouter un article</button>
+                    <button class="btn btn-lg btn-primary btn-block mt-4 mb-4" type="submit" name="submitArticle">Ajouter un article</button>
                 </form>
             </div>
             <div class="allArticles allMenus unselectedAdminMenu">

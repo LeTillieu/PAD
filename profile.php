@@ -5,7 +5,9 @@ include "includes/head.php";
 
     <body class="text-center">
         <?php include 'includes/nav.php'; ?>
+        <div class="container">
 
+        </div>
 
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>

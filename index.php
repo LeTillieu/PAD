@@ -10,6 +10,7 @@
         <div class="row">
 
             <?php
+            $bdd = connectDb();
             $res = getArticles(5);
             $nbElement = count($res)-1;
             $i = 0;

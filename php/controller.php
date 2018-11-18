@@ -4,7 +4,7 @@ session_start();
 //redirect
 function redirect($link = NULL){
     if(!isset($link)){
-        header("Location: ../index.php");
+        header("Location: index.php");
     }else{
         header("Location: ").$link;
     }
@@ -15,7 +15,7 @@ function redirect($link = NULL){
 function connectDb(){
     try {
         $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "isencir", $opts);
+        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "", $opts);
         return $bdd;
     } catch (Exception $e) {
         exit('Impossible to connect to database.');
@@ -85,7 +85,7 @@ function getCreationDate($ts){
 function banWord($article){
     $article = htmlspecialchars(strtolower($article));
     error_log($article,4);
-    $file = fopen("../banWords","r");
+    $file = fopen("banWords","r");
     while($cur = fgets($file)){
         $cur2 = strtolower($cur);
         //check if string are equals
@@ -147,7 +147,6 @@ if(isset($_POST["submitConnect"])){
 
 //add article
 if(isset($_POST["title"], $_POST["content"])){
-    $forbidden = ["<p>Votre texte ici...</p>",""]; //add ban words
     $title = filter_input(INPUT_POST,"title",FILTER_SANITIZE_SPECIAL_CHARS);
     $content = $_POST["content"];
     $date  = new DateTime();
@@ -166,9 +165,6 @@ if(isset($_POST["title"], $_POST["content"])){
             ]);
         }
     }
-
-
-
 }
 
 

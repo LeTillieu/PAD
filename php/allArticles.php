@@ -3,6 +3,7 @@
 
 <?php
 //initialization of variables
+$bdd = connectDb();
 $res = getArticles();
 $nbElement = count($res);
 $i = 0;

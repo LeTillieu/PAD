@@ -74,8 +74,7 @@ bouton.addEventListener("click",function (event) {
         data: {title: $("#inputTitle").val(), content: texte},
         success: function () {
             //redirection
-            window.location.replace("../index.php");
-
+            window.location.replace("index.php");
         },
         error: function(e){
             console.log("Impossible d'ajouter cet article");
