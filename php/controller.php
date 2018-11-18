@@ -62,7 +62,6 @@ function userExistConnect($testedMailOrPseudo, $testedPassword){
 //get $lim articles in database
 function getArticles($lim = NULL){
     $bdd = connectDb();
-    error_log($lim,4);
     if(!isset($lim)){
         $query = "SELECT * FROM articles ORDER BY id DESC";
         $statement = $bdd->prepare($query);
@@ -82,6 +81,46 @@ function getCreationDate($ts){
     return date("d M Y", $ts);
 }
 
+//check ban's words
+function banWord($article){
+    $article = htmlspecialchars(strtolower($article));
+    error_log($article,4);
+    $file = fopen("../banWords","r");
+    while($cur = fgets($file)){
+        $cur2 = strtolower($cur);
+        //check if string are equals
+        if(strpos($article,$cur2) !== false){
+            return false;
+        }
+        //check if string are separated by ' '
+        $cur2 = chunk_split("test",1," ");
+        if(strpos($article,$cur2) !== false){
+            return false;
+        }
+
+        //check if string are separated by '.'
+        $cur2 = strtolower($cur);
+        $cur2 = rtrim(chunk_split($cur2,1,"."),".");
+        if(strpos($article,$cur2) !== false){
+            return false;
+        }
+
+        //check if string are separated by '-'
+        $cur2 = strtolower($cur);
+        $cur2 = rtrim(chunk_split($cur2,1,"-"),"-");
+        if(strpos($article,$cur2) !== false){
+            return false;
+        }
+
+        //check if string are separated by '_'
+        $cur2 = strtolower($cur);
+        $cur2 = rtrim(chunk_split($cur2,1,"_"),"_");
+        if(strpos($article,$cur2) !== false){
+            return false;
+        }
+    }
+    return true;
+}
 
 //Registering
 if(isset($_POST["submitRegister"])){
@@ -112,18 +151,22 @@ if(isset($_POST["title"], $_POST["content"])){
     $title = filter_input(INPUT_POST,"title",FILTER_SANITIZE_SPECIAL_CHARS);
     $content = $_POST["content"];
     $date  = new DateTime();
-
-    if(!in_array($content, $forbidden) && !in_array($title, $forbidden)){
-        $bdd = connectDb();
-        $query = "INSERT INTO articles (title, content, publishedDate, authorId) VALUES(:title, :content, :ts, :id)";
-        $statement = $bdd->prepare($query);
-        $statement->execute([
-            ":title" => $title,
-            ":content" => $content,
-            ":ts" => $date->getTimestamp(),
-            ":id" => $_SESSION["sessionId"]
-        ]);
+    //first checks
+    if(strcmp($title,"") !==0 && strcmp($content,"") !==0 && strcmp($content,"<p>Votre texte ici...</p>")!==0){
+        //ban words check
+        if(banWord($content) && banWord($title) && $title != ""){
+            $bdd = connectDb();
+            $query = "INSERT INTO articles (title, content, publishedDate, authorId) VALUES(:title, :content, :ts, :id)";
+            $statement = $bdd->prepare($query);
+            $statement->execute([
+                ":title" => $title,
+                ":content" => $content,
+                ":ts" => $date->getTimestamp(),
+                ":id" => $_SESSION["sessionId"]
+            ]);
+        }
     }
+
 
 
 }
