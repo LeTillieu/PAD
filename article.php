@@ -36,7 +36,16 @@ include "includes/head.php";
                     </div>
                 </div>
             </div>
+            <hr class="mx-6 px-5">
+            <form action="article.php" class="mb-6 px-5 mx-6">
+                <h3 class="text-center">Participer au débat</h3>
+                <div id="editor" class="pell mt-3"></div>
+                <button class="btn btn-lg btn-primary btn-block my-4" type="submit" name="submitConnect">Participer au débat</button>
+            </form>
         </div>
+
+        <script src="js/editor.js" type="module"></script>
+        <script src="https://unpkg.com/pell"></script>
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
     </body>

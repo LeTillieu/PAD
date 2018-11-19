@@ -37,7 +37,7 @@
                         if($i !== $nbElement){
                         ?>
                             <div class="col-9">
-                                <hr>";
+                                <hr>
                             </div>
                             <div class="col-3"></div>
                         <?php
@@ -61,7 +61,7 @@
                             ?>
                             <div class="col-3"></div>
                             <div class="col-9">
-                                <hr>";
+                                <hr>
                             </div>
                             <?php
                         }
