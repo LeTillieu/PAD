@@ -21,7 +21,6 @@ include "includes/head.php";
                     <label for="inputTitle" class="sr-only">Titre</label>
                     <input type="text" id="inputTitle" name="articleTitle" class="form-control mt-4 mb-2" placeholder="Titre" required autofocus>
                     <div id="editor" class="text-left pell mt-3"></div>
-                    <input type="hidden" class="contentText" name="contentTexte">
                     <button class="btn btn-lg btn-primary btn-block mt-4 mb-4" type="submit" name="submitArticle">Ajouter un article</button>
                 </form>
             </div>

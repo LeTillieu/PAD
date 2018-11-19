@@ -15,7 +15,6 @@ function redirect($link = NULL){
 function connectDb(){
     try {
         $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "", $opts);
         return $bdd;
     } catch (Exception $e) {
         exit('Impossible to connect to database.');
@@ -85,7 +84,6 @@ function getCreationDate($ts){
 //check ban's words
 function banWord($article){
     $article = htmlspecialchars(strtolower($article));
-    error_log($article,4);
     $file = fopen("banWords","r");
     while($cur = fgets($file)){
         $cur2 = strtolower($cur);
@@ -147,7 +145,7 @@ if(isset($_POST["submitConnect"])){
 }
 
 //add article
-if(isset($_POST["title"], $_POST["content"])){
+if(isset($_POST["title"], $_POST["content"]) && $_POST["articleId"] === "NULL"){
     $title = filter_input(INPUT_POST,"title",FILTER_SANITIZE_SPECIAL_CHARS);
     $content = $_POST["content"];
     $date  = new DateTime();
@@ -168,5 +166,27 @@ if(isset($_POST["title"], $_POST["content"])){
     }
 }
 
+//modify article
+if(isset($_POST["title"], $_POST["content"]) && $_POST["articleId"] !== "NULL"){
+    error_log("Article modified",4);
+    $title = filter_input(INPUT_POST,"title",FILTER_SANITIZE_SPECIAL_CHARS);
+    $content = $_POST["content"];
+    $date  = new DateTime();
+    //first checks
+    if(strcmp($title,"") !==0 && strcmp($content,"") !==0 && strcmp($content,"<p>Votre texte ici...</p>")!==0){
+        //ban words check
+        if(banWord($content) && banWord($title) && $title != ""){
+            $bdd = connectDb();
+            $query = "UPDATE articles SET title = :title, content = :content, lastModification = :lm WHERE id = :articleId";
+            $statement = $bdd->prepare($query);
+            $statement->execute([
+                ":title" => $title,
+                ":content" => $content,
+                ":lm" => $date->getTimestamp(),
+                ":articleId" => htmlspecialchars($_POST["articleId"])
+            ]);
+        }
+    }
+}
 
 

@@ -5,7 +5,7 @@
 //initialization of variables
 $bdd = connectDb();
 $res = getArticles();
-$balises = array('<p>', '</p>');
+$balises = array('<p>', '</p>','<br/>','<br>');
 
 foreach ($res as $cur){
     //get author info

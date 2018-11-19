@@ -43,16 +43,17 @@ const editor = init({
 });
 
 
-editor.content.innerHTML ="<p>Votre texte ici...</p>";
-
 
 console.clear();
 
+
+
 //initialization of variables
-var bouton = document.getElementsByName("submitArticle")[0];
+var addArticleButton = document.getElementsByName("submitArticle")[0];
 var nav = $(".adminNav");
 var content = document.getElementsByClassName("pell-content")[0];
-
+var id = 0;
+content.innerHTML = "<p>Votre texte ici...</p>";
 
 //Placeholder fait maison
 content.addEventListener("focus",function () {
@@ -61,17 +62,19 @@ content.addEventListener("focus",function () {
     }
 });
 
-
 //add article to db
-bouton.addEventListener("click",function (event) {
+addArticleButton.addEventListener("click",function (event) {
     event.preventDefault();
     var texte = content.innerHTML;
-
-
+    if($("#modifyArticle").length === 0){
+        id = "NULL";
+    }else{
+        id = $("#modifyArticle").val();
+    }
     $.ajax({
         type: "POST",
         url: "php/controller.php",
-        data: {title: $("#inputTitle").val(), content: texte},
+        data: {title: $("#inputTitle").val(), content: texte, articleId: id},
         success: function () {
             //redirection
             window.location.replace("index.php");

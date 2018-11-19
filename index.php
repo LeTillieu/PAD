@@ -22,7 +22,7 @@
                     if($i % 2 === 0){
                         ?>
                         <div class="col-9 pt-2 mt-3">
-                            <h2 class="text-center mb-3"><a href="article.php" class="text-dark"><?= $cur[1];?></a></h2>
+                            <h2 class="text-center mb-3"><a href="article.php?article=<?php echo $cur[0]?>" class="text-dark"><?= $cur[1];?></a></h2>
                             <?= $cur[2];?>
                             <p class="mb-0 text-right">
                                 De <cite class="author"><?= $authorRes[2]; ?></cite> - le <time class="mr-3" datetime=""><?= getCreationDate($cur[3]);?></time>
@@ -47,7 +47,7 @@
                         ?>
                         <div class="col-3"></div>
                         <div class="col-9 pt-2 mt-3">
-                            <h2 class="text-center mb-3"><a href="article.php" class="text-dark"><?= $cur[1];?></a></h2>
+                            <h2 class="text-center mb-3"><a href="article.php?article=<?php echo $cur[0]?>" class="text-dark"><?= $cur[1];?></a></h2>
                             <?= $cur[2];?>
                             <p class="mb-0 text-right">
                                 De <cite class="author"><?= $authorRes[2]; ?></cite> - le <time datetime="" class="mr-3"><?= getCreationDate($cur[3]);?></time>
