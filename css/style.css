@@ -71,8 +71,11 @@ body {
     text-align: justify;
 }
 
+.col-9 button {
+    border: none;
+}
+
 hr {
-    width: 76%;
     border-top: black 1px solid;
 }
 
@@ -126,4 +129,16 @@ hr {
 
 .unselectedAdminMenu{
     display: none;
+}
+
+.article {
+    border-left: 2px darkred solid;
+}
+
+.com-left {
+    border-left: 2px darkblue solid;
+}
+
+.com-right {
+    border-right: 2px darkgreen solid;
 }

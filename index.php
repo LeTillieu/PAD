@@ -22,34 +22,51 @@
                     if($i % 2 === 0){
                         ?>
                         <div class="col-9 pt-2 mt-3">
-                            <h2 class="text-center"><a href="article.php" class="text-dark"><?= $cur[1];?></a></h2>
+                            <h2 class="text-center mb-3"><a href="article.php" class="text-dark"><?= $cur[1];?></a></h2>
                             <?= $cur[2];?>
-                            <p><cite class="author"><?= $authorRes[2]; ?></cite> - <time datetime=""><?= getCreationDate($cur[3]);?></time></p>
+                            <p class="mb-0 text-right">
+                                De <cite class="author"><?= $authorRes[2]; ?></cite> - le <time class="mr-3" datetime=""><?= getCreationDate($cur[3]);?></time>
+                                <button type="button" class="btn btn-outline-primary pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/comment.svg" alt="Commentaires"></button>
+                                <button type="button" class="btn btn-outline-success pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/share.svg" alt="Partager"></button>
+                                <button type="button" class="btn btn-outline-danger pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/warning.svg" alt="Report"></button>
+                            </p>
                         </div>
                         <div class="col-3"></div>
 
                         <?php
                         if($i !== $nbElement){
-                            echo "<hr>";
+                        ?>
+                            <div class="col-9">
+                                <hr>";
+                            </div>
+                            <div class="col-3"></div>
+                        <?php
                         }
                     }else{
 
                         ?>
                         <div class="col-3"></div>
                         <div class="col-9 pt-2 mt-3">
-                            <h2 class="text-center"><a href="article.php" class="text-dark"><?= $cur[1];?></a></h2>
+                            <h2 class="text-center mb-3"><a href="article.php" class="text-dark"><?= $cur[1];?></a></h2>
                             <?= $cur[2];?>
-                            <p><cite class="author"><?= $authorRes[2]; ?></cite> - <time datetime=""><?= getCreationDate($cur[3]);?></time></p>
+                            <p class="mb-0 text-right">
+                                De <cite class="author"><?= $authorRes[2]; ?></cite> - le <time datetime="" class="mr-3"><?= getCreationDate($cur[3]);?></time>
+                                <button type="button" class="btn btn-outline-primary pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/comment.svg" alt="Commentaires"></button>
+                                <button type="button" class="btn btn-outline-success pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/share.svg" alt="Partager"></button>
+                                <button type="button" class="btn btn-outline-danger pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/warning.svg" alt="Report"></button>
+                            </p>
                         </div>
-
-
                         <?php
                         if($i !== $nbElement){
-                            echo "<hr>";
+                            ?>
+                            <div class="col-3"></div>
+                            <div class="col-9">
+                                <hr>";
+                            </div>
+                            <?php
                         }
                     }
                     $i++;
-
                 }
                 ?>
             </div>

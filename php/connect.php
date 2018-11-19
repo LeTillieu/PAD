@@ -22,11 +22,10 @@ if(!empty($mailOrPseudo) && !empty($pw)){
         ]);
 
         $_SESSION["sessionId"] = $statement->fetchAll()[0][0];
+        redirect();
     }else{
         $error = 4;
     }
 }else{
     $error = 1;
 }
-
-redirect();

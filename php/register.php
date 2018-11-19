@@ -33,6 +33,8 @@ if(!empty($mail) && !empty($pseudo) && !empty($pw)){
                 }
             }
 
+            redirect();
+
         }else{
             $error = 3;
         }
@@ -42,6 +44,4 @@ if(!empty($mail) && !empty($pseudo) && !empty($pw)){
 }else{
     $error = 1;
 }
-$_SESSION["sessionId"] = NULL;
-redirect();
 
