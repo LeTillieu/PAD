@@ -18,7 +18,7 @@ include "includes/head.php";
                 <input type="text" id="inputUsername" name="pseudo" class="form-control mb-2" placeholder="Prénom ou pseudo" required>
                 <label for="inputPassword" class="sr-only">Mot de passe</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
-                <input type="file" name="picture"/>
+                <input type="file" name="picture" class="mb-2 form-control-file"/>
                 <button class="btn btn-lg btn-primary btn-block" type="submit" name="submitRegister">S'inscrire</button>
                 <p class="mt-4 mb-3 text-muted">&copy; FiftyTwo Company - 2018</p>
             </form>

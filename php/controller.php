@@ -15,7 +15,7 @@ function redirect($link = NULL){
 function connectDb(){
     try {
         $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "isencir", $opts);
+        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "", $opts);
         return $bdd;
     } catch (Exception $e) {
         exit('Impossible to connect to database.');
@@ -94,7 +94,7 @@ function banWord($article){
             return false;
         }
         //check if string are separated by ' '
-        $cur2 = chunk_split("test",1," ");
+        $cur2 = chunk_split($cur2,1," ");
         if(strpos($article,$cur2) !== false){
             return false;
         }
