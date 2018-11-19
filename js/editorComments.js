@@ -49,8 +49,7 @@ console.clear();
 
 
 //initialization of variables
-var addArticleButton = document.getElementsByName("submitArticle")[0];
-var nav = $(".adminNav");
+var addArticleButton = document.getElementsByName("submitComment")[0];
 var content = document.getElementsByClassName("pell-content")[0];
 var id = 0;
 content.innerHTML = "<p>Votre texte ici...</p>";
@@ -65,16 +64,13 @@ content.addEventListener("focus",function () {
 //add article to db
 addArticleButton.addEventListener("click",function (event) {
     event.preventDefault();
-    var texte = content.innerHTML;
-    if($("#modifyArticle").length === 0){
-        id = "NULL";
-    }else{
-        id = $("#modifyArticle").val();
-    }
+    var comment = content.innerHTML;
+    var articleId = $("#article").val();
+
     $.ajax({
         type: "POST",
         url: "php/controller.php",
-        data: {title: $("#inputTitle").val(), content: texte, articleId: id},
+        data: {comment: comment, articleId: articleId},
         success: function () {
             //redirection
             window.location.replace("index.php");
@@ -88,14 +84,5 @@ addArticleButton.addEventListener("click",function (event) {
 
 });
 
-
-//show appropriated part of page
-for(var i = 0; i < nav.length; i++){
-    nav[i].onclick = function () {
-        var id = $(this).attr("id");
-        $(".allMenus").addClass("unselectedAdminMenu");
-        $("."+id).removeClass("unselectedAdminMenu");
-    }
-}
 
 

@@ -30,6 +30,12 @@ if(!empty($mail) && !empty($pseudo) && !empty($pw)){
                     $type = explode('/', $_FILES['picture']['type']);
                     $lienImage = 'profilePicture/'.$_SESSION["sessionId"].'.'.$type[1];
                     move_uploaded_file($_FILES['picture']['tmp_name'], $lienImage);
+                    $queryImage = "UPDATE users SET image = :link WHERE id = :id";
+                    $statementImage = $bdd->prepare($queryImage);
+                    $statementImage->execute([
+                        ":link" => $_SESSION["sessionId"].".".$type[1],
+                        ":id" => $_SESSION["sessionId"]
+                    ]);
                 }
             }
 

@@ -190,4 +190,51 @@ if(isset($_POST["title"], $_POST["content"]) && $_POST["articleId"] !== "NULL"){
     }
 }
 
+//add comment
+if(isset($_POST["comment"], $_POST["articleId"])){
+    $color = ["255/0/0","0/255/0","0/255/0","255/0/255","255/255/0","0/255/255","0/0/0","200/200/200"];
+    $color2 = ["155/0/0","0/155/0","0/155/0","155/0/155","155/155/0","0/155/155","0/0/0","100/100/100"];
+    $bdd = connectDb();
+    $commentColor = NULL;
+
+    //add color
+    $queryColor = "SELECT * FROM comments_article WHERE idUser = :iu AND idArticle = :ia";
+    $statementColor = $bdd->prepare($queryColor);
+    $statementColor->execute([
+        ":iu" => $_SESSION["sessionId"],
+        ":ia" => $_POST["articleId"]
+    ]);
+
+    if($statementColor->rowCount() === 0){
+        $queryMembers = "SELECT * FROM comments_article WHERE idArticle = :ia";
+        $statementMembers = $bdd->prepare($queryMembers);
+        $statementMembers->execute([
+            ":ia" => $_POST["articleId"]
+        ]);
+
+        if($statementMembers->rowCount() < 8){
+            $commentColor = $color[$statementMembers->rowCount()];
+        }else if($statementMembers->rowCount() < 16){
+            $commentColor = $color2[$statementMembers->rowCount()-8];
+        }else{
+            $commentColor = rand(0,255)."/".rand(0,255)."/".rand(0,255);
+        }
+    }else{
+        $commentColor = $statementColor->fetchAll()[0][4];
+    }
+
+    //add comment
+    $queryComment = "INSERT INTO comments_article (idUser, idArticle, comment, color) VALUE(:iu,:ia,:comment,:color)";
+    $statementComment = $bdd->prepare($queryComment);
+    $statementComment->execute([
+        ":iu" => $_SESSION["sessionId"],
+        ":ia" => $_POST["articleId"],
+        ":comment" => $_POST["comment"],
+        ":color" => $commentColor
+    ]);
+
+
+
+
+}
 
