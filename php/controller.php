@@ -67,7 +67,6 @@ function getArticles($lim = NULL, $offset = NULL){
         $statement = $bdd->prepare($query);
         $statement->execute();
     }else{
-        error_log("set",4);
         $query = "SELECT * FROM articles ORDER BY id DESC LIMIT ".$lim." OFFSET ".$offset;
         $statement = $bdd->prepare($query);
         $statement->execute();
@@ -123,13 +122,86 @@ function banWord($article){
     return true;
 }
 
+//search
+function search($value){
+    $result = [];
+    $resultEnd = [];
+    $bdd = connectDb();
+    $queryArticle = "SELECT * FROM articles";
+    $queryComment = "SELECT * FROM comments_article";
+
+    $statementArticle = $bdd->prepare($queryArticle);
+    $statementComment = $bdd->prepare($queryComment);
+
+    $statementArticle->execute();
+    $statementComment->execute();
+
+    $articles = $statementArticle->fetchAll();
+    $comments = $statementComment->fetchAll();
+
+    foreach ($articles as $curArt) {
+        $curTitle = $curArt[1];
+        $curContent = htmlspecialchars($curArt[2]);
+        if (strpos($curTitle, $value) != false || strpos($curContent, $value) != false) {
+            array_push($result, $curArt[0]);
+        } else {
+            $wordMatch = 0;
+            $valueSeparated = explode(" ", $value);
+            var_dump($valueSeparated);
+            echo $curTitle;
+            foreach ($valueSeparated as $curWord) {
+                echo "<br>";
+                echo $curWord;
+                echo "<br>";
+                if (substr_count($curTitle, $curWord) > 0 || substr_count($curContent, $curWord) > 0) {
+                    $wordMatch += 1;
+                }
+            }
+            echo $wordMatch;
+            echo "<br>";
+            if ($wordMatch === count($valueSeparated)) {
+                array_push($resultEnd, $curArt[0]);
+            }
+        }
+
+
+    }
+    foreach ($comments as $curComm) {
+        if (strpos($curComm[3], $value) != false) {
+            array_push($result, $curComm[2]);
+        } else {
+            $wordMatch = 0;
+            $valueSeparated = explode(" ", $value);
+            foreach ($valueSeparated as $curWord) {
+                if (substr_count($curComm[3], $curWord) > 0) {
+                    $wordMatch += 1;
+                }
+            }
+            if ($wordMatch === count($valueSeparated)) {
+                array_push($resultEnd, $curComm[2]);
+            }
+        }
+
+    }
+
+    foreach ($resultEnd as $toAdd) {
+        array_push($result, $toAdd);
+    }
+
+    return $result;
+}
+
 //Registering
 if(isset($_POST["submitRegister"])){
+    error_log("register",4);
+
     include("register.php");
 }
 
 //connection by cookies
-if(isset($_COOKIE["mailOrPseudo"],$_COOKIE["pw"])){
+if(isset($_COOKIE["mailOrPseudo"],$_COOKIE["pw"]) && !isset($_SESSION["sessionId"])){
+    error_log("connexion: cookie",4);
+
     if(userExistConnect($_COOKIE["mailOrPseudo"],$_COOKIE["pw"]) === 0){
         $bdd = connectDb();
         $query = "SELECT * FROM users WHERE mail = :mailOrPseudo OR pseudo = :mailOrPseudo";
@@ -143,11 +215,15 @@ if(isset($_COOKIE["mailOrPseudo"],$_COOKIE["pw"])){
 
 //connection by form
 if(isset($_POST["submitConnect"])){
+    error_log("connection: form",4);
+
     include("connect.php");
 }
 
 //add article
 if(isset($_POST["title"], $_POST["content"]) && $_POST["articleId"] === "NULL"){
+    error_log("add Article",4);
+
     $title = filter_input(INPUT_POST,"title",FILTER_SANITIZE_SPECIAL_CHARS);
     $content = $_POST["content"];
     $date  = new DateTime();
@@ -170,7 +246,7 @@ if(isset($_POST["title"], $_POST["content"]) && $_POST["articleId"] === "NULL"){
 
 //modify article
 if(isset($_POST["title"], $_POST["content"]) && $_POST["articleId"] !== "NULL"){
-    error_log("Article modified",4);
+    error_log("modify article",4);
     $title = filter_input(INPUT_POST,"title",FILTER_SANITIZE_SPECIAL_CHARS);
     $content = $_POST["content"];
     $date  = new DateTime();
@@ -193,6 +269,8 @@ if(isset($_POST["title"], $_POST["content"]) && $_POST["articleId"] !== "NULL"){
 
 //add comment
 if(isset($_POST["comment"], $_POST["articleId"])){
+    error_log("add comment",4);
+
     $color = ["155/0/0","0/155/0","0/155/0","155/0/155","155/155/0","0/155/155","0/0/0","100/100/100"];
     $color2 = ["255/0/0","0/255/0","0/255/0","255/0/255","255/255/0","0/255/255","0/0/0","200/200/200"];
     $bdd = connectDb();
@@ -238,3 +316,29 @@ if(isset($_POST["comment"], $_POST["articleId"])){
 
 }
 
+//remove article
+if(isset($_POST["deleteArticle"])){
+    error_log("Delete Article",4);
+    $query = "DELETE FROM articles WHERE id = :id";
+    $statement = $bdd->prepare($query);
+    $statement->execute([
+        ":id" => $_POST["deleteArticle"]
+    ]);
+
+    $queryComment = "DELETE FROM comments_article WHERE idArticle = :id";
+    $statementComment = $bdd->prepare($queryComment);
+    $statementComment->execute([
+        ":id" => $_POST["deleteArticle"]
+    ]);
+}
+
+//search article
+if(isset($_POST["search"]) && $_POST["searchedText"]!== ""){
+    error_log("search",4);
+    $idArticles = search($_POST["searchedText"]);
+    $link = "../research.php?nb=".count($idArticles);
+    for($i = 1; $i <= count($idArticles); $i++){
+        $link= $link."&article".($i-1)."=".$idArticles[$i-1];
+    }
+    header("Location: ".$link);
+}

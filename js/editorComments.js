@@ -73,7 +73,7 @@ addArticleButton.addEventListener("click",function (event) {
         data: {comment: comment, articleId: articleId},
         success: function () {
             //redirection
-            window.location.replace("index.php");
+            window.location.replace("article.php?article="+articleId);
         },
         error: function(e){
             console.log("Impossible d'ajouter cet article");

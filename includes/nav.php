@@ -5,9 +5,9 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <form class="form-inline mr-auto my-2 my-md-0">
-            <input class="form-control mr-2" type="text" placeholder="Rechercher">
-            <button class="btn btn-outline-success mr-auto ml-auto" type="submit" id="btn-search">Search</button>
+        <form class="form-inline mr-auto my-2 my-md-0" action="../php/controller.php" method="POST">
+            <input class="form-control mr-2" name="searchedText" type="text" placeholder="Rechercher">
+            <button class="btn btn-outline-success mr-auto ml-auto" name="search" type="submit" id="btn-search">Search</button>
         </form>
         <ul class="navbar-nav">
             <li class="nav-item">

@@ -77,7 +77,7 @@ addArticleButton.addEventListener("click",function (event) {
         data: {title: $("#inputTitle").val(), content: texte, articleId: id},
         success: function () {
             //redirection
-            window.location.replace("index.php");
+            window.location.replace("administration.php");
         },
         error: function(e){
             console.log("Impossible d'ajouter cet article");
