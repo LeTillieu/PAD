@@ -8,7 +8,6 @@
 
         <div class="container mt-3">
             <div class="row">
-
                 <?php
                 $bdd = connectDb();
 
@@ -39,25 +38,21 @@
                             <h2 class="text-center mb-3"><a href="article.php?article=<?php echo $cur[0]?>" class="text-dark"><?= $cur[1];?></a></h2>
                             <?= $cur[2];?>
                             <p class="mb-0 text-right">
-                                De <cite class="author"><?= $authorRes[2]; ?></cite> - le <time class="mr-3" datetime=""><?= getCreationDate($cur[3]);?></time>
+                                De <cite class="author"><?= $authorRes[2]; ?></cite> - le <time datetime=""><?= getCreationDate($cur[3]);?></time>
                                 <button type="button" class="btn btn-outline-primary pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/comment.svg" alt="Commentaires"></button>
                                 <button type="button" class="btn btn-outline-success pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/share.svg" alt="Partager"></button>
                                 <button type="button" class="btn btn-outline-danger pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/warning.svg" alt="Report"></button>
                             </p>
+                            <?php
+                            if($i !== $nbElement){
+                                ?>
+                                <hr>
+                                <?php
+                            }?>
                         </div>
                         <div class="col-3"></div>
-
                         <?php
-                        if($i !== $nbElement){
-                        ?>
-                            <div class="col-9">
-                                <hr>
-                            </div>
-                            <div class="col-3"></div>
-                        <?php
-                        }
-                    }else{
-
+                        }else{
                         ?>
                         <div class="col-3"></div>
                         <div class="col-9 pt-2 mt-3">
@@ -69,16 +64,14 @@
                                 <button type="button" class="btn btn-outline-success pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/share.svg" alt="Partager"></button>
                                 <button type="button" class="btn btn-outline-danger pt-1 align-baseline"><img width="17.5px" height="17.5px" src="img/warning.svg" alt="Report"></button>
                             </p>
+                            <?php
+                            if($i !== $nbElement){
+                            ?>
+                            <hr>
+                            <?php
+                            }?>
                         </div>
                         <?php
-                        if($i !== $nbElement){
-                            ?>
-                            <div class="col-3"></div>
-                            <div class="col-9">
-                                <hr>
-                            </div>
-                            <?php
-                        }
                     }
                     $i++;
                 }

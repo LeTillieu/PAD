@@ -36,7 +36,7 @@ body {
     padding: 3.5px 12px;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 991px) {
     .navbar-nav > li > a {
         /* (80px - line-height of 27px) / 2 = 26.5px */
         padding-top: 26.5px;
@@ -136,5 +136,9 @@ hr {
 }
 
 .col-6 button {
+    border: none;
+}
+
+p.text-right button {
     border: none;
 }
