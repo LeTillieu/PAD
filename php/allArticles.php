@@ -1,6 +1,6 @@
 <div class="container mt-3">
     <div class="container">
-
+        <div class="row">
 <?php
 //initialization of variables
 $bdd = connectDb();
@@ -15,11 +15,12 @@ foreach ($res as $cur){
     $authorRes = $authorStatement->fetchAll()[0];
 
     ?>
-        <a href="#"><?php echo $authorRes[2].' - '.str_replace($balises, "",$cur[1].' - '.getCreationDate($cur[3]));?></a>
-        <br/>
+             <div class="col-6"><p><?php echo $authorRes[2].' - '.str_replace($balises, "",$cur[1].' - '.getCreationDate($cur[3])); ?></p></div>
+             <div class="col-6"><button type="button" class="btn btn-link">Modifier</button><button type="button" class="btn btn-outline-danger">Supprimer</button></div>
     <?php
 
 }
 ?>
+        </div>
     </div>
 </div>

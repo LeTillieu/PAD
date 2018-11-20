@@ -15,7 +15,7 @@ function redirect($link = NULL){
 function connectDb(){
     try {
         $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "isencir", $opts);
+        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "", $opts);
         return $bdd;
     } catch (Exception $e) {
         exit('Impossible to connect to database.');
@@ -192,8 +192,8 @@ if(isset($_POST["title"], $_POST["content"]) && $_POST["articleId"] !== "NULL"){
 
 //add comment
 if(isset($_POST["comment"], $_POST["articleId"])){
-    $color = ["255/0/0","0/255/0","0/255/0","255/0/255","255/255/0","0/255/255","0/0/0","200/200/200"];
-    $color2 = ["155/0/0","0/155/0","0/155/0","155/0/155","155/155/0","0/155/155","0/0/0","100/100/100"];
+    $color = ["155/0/0","0/155/0","0/155/0","155/0/155","155/155/0","0/155/155","0/0/0","100/100/100"];
+    $color2 = ["255/0/0","0/255/0","0/255/0","255/0/255","255/255/0","0/255/255","0/0/0","200/200/200"];
     $bdd = connectDb();
     $commentColor = NULL;
 
@@ -232,9 +232,6 @@ if(isset($_POST["comment"], $_POST["articleId"])){
         ":comment" => $_POST["comment"],
         ":color" => $commentColor
     ]);
-
-
-
 
 }
 

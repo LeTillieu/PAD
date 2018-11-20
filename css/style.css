@@ -131,14 +131,10 @@ hr {
     display: none;
 }
 
-.article {
-    border-left: 2px darkred solid;
+.col-9 button {
+    border: none;
 }
 
-.com-left {
-    border-left: 2px darkblue solid;
-}
-
-.com-right {
-    border-right: 2px darkgreen solid;
+.col-6 button {
+    border: none;
 }
