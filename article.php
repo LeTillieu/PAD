@@ -40,14 +40,21 @@ include "includes/head.php";
                         $color = $cur[4];
                         $color = explode("/",$color);
                         $color = "rgb(".$color[0].",".$color[1].",".$color[2].")";
+
+                        if($resAuthor[0] === $resArticle[4]) {
+                            $displayPseudo = "<img src='img/author.svg' width='20px' height='20px' alt='Auteur'/> ". $resAuthor[2];
+                        } else {
+                            $displayPseudo = $resAuthor[2];
+                        }
+
                         if($resAuthor[0] === $_SESSION["sessionId"]){
 
                         ?>
                         <div class="col-6">
                         </div>
                         <div class="col-6 com-left mt-4" style="border-left: 2px <?php echo $color; ?> solid">
-                            <h4><img src="profilePicture/<?php echo $resAuthor[5]; ?>" alt="Photo de profil de <?php echo $resAuthor[2]; ?>" width="40px" height="40px" class="mr-3"><?php echo $resAuthor[2]; ?></h4>
-                            <p><?php echo $cur[3]; ?></p>
+                            <h4><img src="profilePicture/<?= $resAuthor[5]; ?>" alt="Photo de profil de <?= $resAuthor[2]; ?>" width="40px" height="40px" class="mr-3"><?= $displayPseudo; ?></h4>
+                            <p><?= $cur[3]; ?></p>
                         </div>
                             
                         <?php
@@ -55,8 +62,8 @@ include "includes/head.php";
                         ?>
 
                         <div class="col-6 com-left mt-4" style="border-left: 2px <?php echo $color; ?> solid">
-                            <h4><img src="profilePicture/<?php echo $resAuthor[5]; ?>" alt="Photo de profil de <?php echo $resAuthor[2]; ?>" width="40px" height="40px" class="mr-3"><?php echo $resAuthor[2]; ?></h4>
-                            <p><?php echo $cur[3]; ?></p>
+                            <h4><img src="profilePicture/<?= $resAuthor[5]; ?>" alt="Photo de profil de <?= $resAuthor[2]; ?>" width="40px" height="40px" class="mr-3"><?= $displayPseudo ?></h4>
+                            <p><?= $cur[3]; ?></p>
                         </div>
                         <div class="col-6">
                         </div>
