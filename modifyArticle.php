@@ -25,6 +25,8 @@ if(!isset($_SESSION['sessionId'])){
 
 
 <script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/editor.js" type="module"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         <?php
@@ -38,15 +40,15 @@ if(!isset($_SESSION['sessionId'])){
         $res = $statement->fetchAll()[0];
         $res[1] = str_replace("'","\'",$res[1]);
         $res[2] = str_replace("'","\'",$res[2]);
+        $res[2] = str_replace("\n","<br>",$res[2]);
         ?>
-        $(".pell-content").html('<?php echo $res[2]; ?>');
         $("#inputTitle").attr("value", '<?php echo $res[1]; ?>');
+        $(".pell-content").html('<?php echo $res[2]; ?>');
         <?php
         }
         ?>
     });
 </script>
-<script src="js/editor.js" type="module"></script>
 <script src="https://unpkg.com/pell"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 </body>

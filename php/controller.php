@@ -15,7 +15,7 @@ function redirect($link = NULL){
 function connectDb(){
     try {
         $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "", $opts);
+        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "isencir", $opts);
         return $bdd;
     } catch (Exception $e) {
         exit('Impossible to connect to database.');
@@ -60,14 +60,15 @@ function userExistConnect($testedMailOrPseudo, $testedPassword){
 }
 
 //get $lim articles in database
-function getArticles($lim = NULL){
+function getArticles($lim = NULL, $offset = NULL){
     $bdd = connectDb();
-    if(!isset($lim)){
+    if(!isset($lim, $offset)){
         $query = "SELECT * FROM articles ORDER BY id DESC";
         $statement = $bdd->prepare($query);
         $statement->execute();
     }else{
-        $query = "SELECT * FROM articles ORDER BY id DESC LIMIT ".$lim;
+        error_log("set",4);
+        $query = "SELECT * FROM articles ORDER BY id DESC LIMIT ".$lim." OFFSET ".$offset;
         $statement = $bdd->prepare($query);
         $statement->execute();
     }
@@ -195,6 +196,7 @@ if(isset($_POST["comment"], $_POST["articleId"])){
     $color = ["155/0/0","0/155/0","0/155/0","155/0/155","155/155/0","0/155/155","0/0/0","100/100/100"];
     $color2 = ["255/0/0","0/255/0","0/255/0","255/0/255","255/255/0","0/255/255","0/0/0","200/200/200"];
     $bdd = connectDb();
+    $date  = new DateTime();
     $commentColor = NULL;
 
     //add color
@@ -224,13 +226,14 @@ if(isset($_POST["comment"], $_POST["articleId"])){
     }
 
     //add comment
-    $queryComment = "INSERT INTO comments_article (idUser, idArticle, comment, color) VALUE(:iu,:ia,:comment,:color)";
+    $queryComment = "INSERT INTO comments_article (idUser, idArticle, comment, color, commentDate) VALUE(:iu,:ia,:comment,:color, :cd)";
     $statementComment = $bdd->prepare($queryComment);
     $statementComment->execute([
         ":iu" => $_SESSION["sessionId"],
         ":ia" => $_POST["articleId"],
         ":comment" => $_POST["comment"],
-        ":color" => $commentColor
+        ":color" => $commentColor,
+        ":cd" => $date->getTimestamp()
     ]);
 
 }

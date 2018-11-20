@@ -11,7 +11,21 @@
 
                 <?php
                 $bdd = connectDb();
-                $res = getArticles(5);
+
+                $queryNbArticle = "SELECT * FROM articles";
+                $statementNbArticle = $bdd->prepare($queryNbArticle);
+                $statementNbArticle->execute();
+                $nbPage = ceil($statementNbArticle->rowCount()/5);
+
+                if(isset($_GET["curPage"]) && ($_GET["curPage"] <= 0 || $_GET["curPage"] > $nbPage)){
+                    redirect();
+                }
+
+                if(!isset($_GET["curPage"])){
+                    $res = getArticles(5,0);
+                }else{
+                    $res = getArticles(5,$_GET["curPage"]*5-5);
+                }
                 $nbElement = count($res)-1;
                 $i = 0;
                 foreach ($res as $cur){
@@ -70,6 +84,10 @@
                 }
                 ?>
             </div>
+
+            <?php
+            include "includes/pagination.php";
+            ?>
         </div>
 
         <script src="js/jquery-3.3.1.min.js"></script>

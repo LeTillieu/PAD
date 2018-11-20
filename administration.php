@@ -5,6 +5,7 @@ include "includes/head.php";
 
     <body class="text-center">
         <?php include 'includes/nav.php';
+
         if(!isset($_SESSION['sessionId'])){
             redirect();
         }

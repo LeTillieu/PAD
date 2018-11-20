@@ -16,7 +16,10 @@ foreach ($res as $cur){
 
     ?>
              <div class="col-6"><p><?php echo $authorRes[2].' - '.str_replace($balises, "",$cur[1].' - '.getCreationDate($cur[3])); ?></p></div>
-             <div class="col-6"><button type="button" class="btn btn-link">Modifier</button><button type="button" class="btn btn-outline-danger">Supprimer</button></div>
+             <div class="col-6">
+                 <button type="button" class="btn btn-link modify" name="<?php echo $cur[0];?>">Modifier</button>
+                <button type="button" class="btn btn-outline-danger" class="delete">Supprimer</button>
+             </div>
     <?php
 
 }
@@ -24,3 +27,10 @@ foreach ($res as $cur){
         </div>
     </div>
 </div>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+    var modify = $(".modify");
+    modify.click(function (e) {
+        window.location.replace("modifyArticle.php?modifyArticle="+e.currentTarget.name);
+    });
+</script>
