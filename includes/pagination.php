@@ -80,7 +80,7 @@
         }
 
 
-        if(!isset($_GET["curPage"]) || $_GET["curPage"] <= $nbPage) {
+        if(!isset($_GET["curPage"]) || $_GET["curPage"] < $nbPage) {
             $link = explode("?",$_SERVER['REQUEST_URI']);
             $link = $link[0];
             $link = "http://".$_SERVER["HTTP_HOST"].$link."?curPage=".($_GET["curPage"]+1);
