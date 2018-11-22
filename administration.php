@@ -29,7 +29,9 @@ include "includes/head.php";
                 <?php include("php/allArticles.php"); ?>
             </div>
             <div class="allReported allMenus unselectedAdminMenu">
-                reported
+                <?php echo "test"; ?>
+                <?php include("php/reportedArticle.php"); ?>
+
             </div>
         </div>
 

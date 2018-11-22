@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+if($_SERVER['PHP_SELF'] === "/php/controller.php"){
+    $variables = parse_ini_file("../infos.ini",true);
+}else{
+    $variables = parse_ini_file("infos.ini",true);
+}
+$bdd = connectDb();
+
+
 //redirect
 function redirect($link = NULL){
     if(!isset($link)){
@@ -11,12 +19,16 @@ function redirect($link = NULL){
     exit;
 }
 
+
+
 //connect to DataBase
 function connectDb(){
+    global $variables;
+    $infoDb = $variables["db"];
+    $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+    $bdd = new PDO("mysql:host=".$infoDb["server_address"].";dbname=".$infoDb["name"].";charset=utf8",$infoDb["username"], $infoDb["password"], $opts);
+    return $bdd;
     try {
-        $opts = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-        $bdd = new PDO("mysql:host=localhost;dbname=pad;charset=utf8","root", "isencir", $opts);
-        return $bdd;
     } catch (Exception $e) {
         exit('Impossible to connect to database.');
     }
@@ -341,4 +353,22 @@ if(isset($_POST["search"]) && $_POST["searchedText"]!== ""){
         $link= $link."&article".($i-1)."=".$idArticles[$i-1];
     }
     header("Location: ".$link);
+}
+
+//report article
+if(isset($_POST["report"],$_POST["id"]) && $_POST["report"] === "true"){
+    error_log("report article",4);
+    $queryArticle = "SELECT * FROM articles WHERE id = :id";
+    $statementArticle = $bdd->prepare($queryArticle);
+    $statementArticle->execute([
+        ":id" => $_POST["id"]
+    ]);
+    $nbReport = $statementArticle->fetchAll()[0][5];
+
+    $queryAdd = "UPDATE articles SET reported = :newReport WHERE id = :id";
+    $statementAdd = $bdd->prepare($queryAdd);
+    $statementAdd->execute([
+       ":newReport" => $nbReport+1,
+        ":id" => $_POST["id"]
+    ]);
 }
